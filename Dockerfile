@@ -1,14 +1,14 @@
 # Use official n8n image (Alpine-based)
 FROM n8nio/n8n:latest
 
-# Switch to root to install FFmpeg
+# Install FFmpeg as root without switching users manually
 USER root
 
-# Update package lists and install FFmpeg
-RUN apk add --no-cache ffmpeg
+# Install FFmpeg and dependencies
+RUN apk add --no-cache ffmpeg bash
 
-# Switch back to default n8n user
+# Switch back to n8n user
 USER node
 
-# Default start command
-CMD ["n8n", "start"]
+# Start n8n
+ENTRYPOINT ["n8n", "start"]
